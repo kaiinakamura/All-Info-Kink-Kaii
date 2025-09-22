@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAIISTORE - Store & Payment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-right: 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #fff;
+            box-shadow: 0 0 20px rgba(0, 128, 255, 0.7);
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .title {
+            text-align: center;
+        }
+
+        .title h1 {
+            font-size: 2.5rem;
+            text-shadow: 0 0 10px rgba(0, 128, 255, 0.8);
+            margin-bottom: 5px;
+        }
+
+        .title p {
+            color: #ccc;
+            font-size: 1.2rem;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .column {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .column:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .column-header {
+            color: #4a86e8;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4a86e8;
+            text-shadow: 0 0 5px rgba(74, 134, 232, 0.5);
+        }
+
+        .payment-header {
+            color: #4a86e8;
+        }
+
+        /* Payment Section */
+        .payment-method {
+            margin-bottom: 25px;
+        }
+
+        .payment-method h3 {
+            color: #4a86e8;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        .payment-detail {
+            background: rgba(0, 30, 60, 0.5);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            transition: background 0.3s ease;
+        }
+
+        .payment-detail:hover {
+            background: rgba(0, 50, 100, 0.6);
+        }
+
+        .payment-detail p {
+            margin: 5px 0;
+            font-size: 1.1rem;
+        }
+
+        .qr-code {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .qr-code img {
+            max-width: 200px;
+            border-radius: 10px;
+            border: 2px solid #fff;
+            box-shadow: 0 0 15px rgba(0, 128, 255, 0.5);
+        }
+
+        /* Store Section */
+        .product-list {
+            list-style: none;
+        }
+
+        .product-item {
+            background: rgba(30, 30, 30, 0.7);
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            transition: transform 0.3s ease, background 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-item:hover {
+            transform: translateX(5px);
+            background: rgba(50, 50, 50, 0.8);
+        }
+
+        .product-item h3 {
+            color: #4a86e8;
+            margin-bottom: 5px;
+            font-size: 1.3rem;
+        }
+
+        .product-item p {
+            color: #ccc;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .title h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .column {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .column:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .column:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="https://files.catbox.moe/qisl2l.jpg" alt="KAIISTORE Logo">
+            </div>
+            <div class="title">
+                <h1>ALL INFO KAIISTORE</h1>
+                <p>Store & Payment Information</p>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="column">
+                <h2 class="column-header payment-header">PAYMENT</h2>
+                
+                <div class="payment-method">
+                    <h3><i class="fas fa-money-bill-wave"></i> Dana</h3>
+                    <div class="payment-detail">
+                        <p><strong>Nomor:</strong> 081542527849</p>
+                        <p><strong>A/N:</strong> PE*** EL*** SA****</p>
+                    </div>
+                </div>
+                
+                <div class="payment-method">
+                    <h3><i class="fab fa-google-wallet"></i> Gopay</h3>
+                    <div class="payment-detail">
+                        <p><strong>Nomor:</strong> 085931081614</p>
+                        <p><strong>A/N:</strong> GA ADA</p>
+                    </div>
+                </div>
+                
+                <div class="payment-method">
+                    <h3><i class="fas fa-qrcode"></i> Qris</h3>
+                    <div class="payment-detail">
+                        <p><strong>Link:</strong> https://files.catbox.moe/njxjvk.jpg</p>
+                        <p><strong>A/N:</strong> DI QRIS BESERTA BUKTINYA</p>
+                    </div>
+                    <div class="qr-code">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://files.catbox.moe/njxjvk.jpg" alt="QR Code">
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <h2 class="column-header">STORE</h2>
+                
+                <ul class="product-list">
+                    <li class="product-item" onclick="alert('Anda memilih: MURID SUNTIK - 1K JOIN | 3K OWN')">
+                        <h3>MURID SUNTIK</h3>
+                        <p>1K JOIN | 3K OWN</p>
+                    </li>
+                    <li class="product-item" onclick="alert('Anda memilih: MURID LOGO - 5K JOIN | 8K OWN')">
+                        <h3>MURID LOGO</h3>
+                        <p>5K JOIN | 8K OWN</p>
+                    </li>
+                    <li class="product-item" onclick="alert('Anda memilih: MURID WEB - 10K JOIN')">
+                        <h3>MURID WEB</h3>
+                        <p>10K JOIN</p>
+                    </li>
+                </ul>
+                
+                <div style="margin-top: 30px; text-align: center;">
+                    <h3>OPEN MURID</h3>
+                    <p style="margin-top: 10px; color: #4a86e8;">Klik pada item untuk memilih</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2023 KAIISTORE - All Rights Reserved</p>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animation to product items when hovering
+        const productItems = document.querySelectorAll('.product-item');
+        productItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.boxShadow = '0 0 15px rgba(74, 134, 232, 0.7)';
+            });
+            item.addEventListener('mouseleave', () => {
+                item.style.boxShadow = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
